@@ -1,0 +1,11 @@
+.rights {
+  color: var(--color-text2);
+}
+h2 {
+  color: var(--color-text);
+}
+footer {
+  background-color: var(--color-bg2);
+  width: 100%;
+  line-height: 1.6;
+}
