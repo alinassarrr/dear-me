@@ -10,10 +10,10 @@
   flex-direction: column;
 }
 .container {
-  padding: var(--space-lg);
+  padding: var(--space-xl) 5rem;
 }
 
 main {
-  margin-top: 60px;
+  margin-top: 80px;
   flex: 1;
 }
