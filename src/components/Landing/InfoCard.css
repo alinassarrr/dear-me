@@ -1,0 +1,24 @@
+.info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl);
+  background-color: var(--color-bg);
+  border-radius: 10px;
+  gap: 1rem;
+  max-width: calc(100% / 3);
+}
+
+.icon img {
+  width: 100%;
+  object-fit: cover;
+}
+.title {
+  font-size: var(--font-xl);
+  font-weight: bold;
+}
+.desc {
+  max-width: 80%;
+  line-height: 1.7;
+}
