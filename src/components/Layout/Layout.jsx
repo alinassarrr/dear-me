@@ -8,7 +8,7 @@ const Layout = () => {
     // fragments used since we are returning multi parent element since react must return a single parent
     <>
       <Header />
-      <main className="container">
+      <main>
         <Outlet />
       </main>
       <Footer />
