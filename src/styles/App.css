@@ -17,3 +17,7 @@ main {
   margin-top: 80px;
   flex: 1;
 }
+.sec-title {
+  font-size: var(--font-2xl);
+  padding-bottom: 1rem;
+}
