@@ -5,13 +5,14 @@
 }
 
 :root {
-  --color-primary: #5c288d;
-  --color-sec: #220d45;
+  --color-primary: #603fef;
+  --color-sec: #4d00ff;
+  --color-hover: #9933ff;
   --color-bg: #1a2337;
-  --color-bg2: #3a405a;
+  --color-bg2: #1d2b48;
+  --color-bg3: #232936;
   --color-text: #f4f5f7;
   --color-text2: #939393;
-  --color-hover: #8c52c2;
 
   --font-xs: 0.75rem; /* 12px */
   --font-sm: 0.875rem; /* 14px */
@@ -32,11 +33,5 @@ ul {
   list-style: none;
 }
 a {
-  color: var(--color-text);
   text-decoration: none;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: 5px;
-}
-a:hover {
-  background-color: var(--color-hover);
 }
