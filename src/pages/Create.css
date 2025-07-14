@@ -6,11 +6,17 @@
   width: 60%;
   margin: 2rem auto;
 
-  form .title {
+  .title {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    h3 {
+      padding: 0;
+    }
+    img {
+      width: 100%;
+    }
   }
   form .content {
     display: flex;
@@ -94,5 +100,19 @@
   }
   .tag-btn:disabled {
     background-color: var(--color-text2);
+  }
+  .attachments {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .location {
+    border-radius: 5px;
+    background-color: var(--color-bg);
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
   }
 }
