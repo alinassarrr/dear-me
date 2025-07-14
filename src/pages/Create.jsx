@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import select from "../hooks/navSelect";
 import "./Create.css";
 import InputField from "../components/Create/InputField";
+import AttachmentBtn from "../components/Create/AttachmentBtn";
 
 const Create = () => {
   const emojis = [
@@ -54,7 +55,9 @@ const Create = () => {
     <div className="create-form form-container">
       <form action="">
         <div className="title">
-          <img src="icons/Create/hourglass.svg" alt="" />
+          <div className="title-icon">
+            <img src="icons/Create/hourglass.svg" alt="" />
+          </div>
           <h3 className="sec-title"> Create Your Time Capsule</h3>
         </div>
         <div className="content">
@@ -173,16 +176,30 @@ const Create = () => {
               </select>
             </div>
           </div>
-          <div className="attachments">
-            {/*
-             1
-            2
-            3 */}
+          <div className="attachment-container">
+            <label htmlFor="tag">Attachments (Optional)</label>
+            <div className="attachments">
+              <AttachmentBtn
+                src="icons/Create/upload.svg"
+                text="Upload Image"
+              />
+              <AttachmentBtn src="icons/Create/mic.svg" text="Record Audio" />
+              <AttachmentBtn
+                src="icons/Create/file-code.svg"
+                text="Add Text Note"
+              />
+            </div>
           </div>
-          <div className="additional">
+          {/* <div className="additional">
             <textarea name="" id=""></textarea>
+          </div> */}
+          <div className="location">
+            <img src="icons/Create/map-pin.svg" alt="location" />
+            <p>
+              Location and IP address will be automatically captured for this
+              capsule
+            </p>
           </div>
-          <div className="location"></div>
         </div>
         <div className="buttons"></div>
       </form>
