@@ -1,0 +1,16 @@
+.attach {
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  border-radius: 5px;
+  color: var(--color-text);
+  border: 0;
+  width: 30%;
+  cursor: pointer;
+}
+.attach:hover {
+  background-color: var(--color-primary);
+}
