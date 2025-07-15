@@ -5,6 +5,7 @@ import AttachmentBtn from "../../components/Create/Attachments/AttachmentBtn";
 import InputField from "../../components/Common/Input/InputField";
 import Button from "../../components/Common/Button/Button";
 import Tag from "../../components/Common/Tags/Tag";
+import Dropdown from "../../components/Common/Dropdown/Dropdown";
 
 const Create = () => {
   const emojis = [
@@ -22,6 +23,20 @@ const Create = () => {
     { emoji: "🌠", value: "Wish & Hope" },
     { emoji: "📸", value: "Captured Memory" },
     { emoji: "💡", value: "Inspiration" },
+  ];
+
+  const moodOptions = [
+    { value: "happy", text: "😊 Happy & Content" },
+    { value: "sad", text: "😢 Sad & Reflective" },
+    { value: "excited", text: "🤩 Excited & Inspired" },
+    { value: "calm", text: "😌 Peaceful & Calm" },
+    { value: "thoughtful", text: "🤔 Thoughtful & Curious" },
+  ];
+
+  const securityOptions = [
+    { value: "private", text: "🔒 Private - Only You" },
+    { value: "public", text: "🌍 Public - Everyone" },
+    { value: "unlisted", text: "🔗 Unlisted -Sharable Link" },
   ];
 
   const [capsuleTitile, setcapsuleTitile] = useState("");
@@ -168,22 +183,12 @@ const Create = () => {
             </div>
             <div className="privacy input2">
               <label htmlFor="">Privacy Settings</label>
-              <select
-                name="security"
+              <Dropdown
                 id="security"
                 onChange={(e) => setsecurity(e.target.value)}
                 value={security}
-              >
-                <option name="status" value="private">
-                  🔒 Private - Only You
-                </option>
-                <option name="status" value="public">
-                  🌍 Public - Everyone
-                </option>
-                <option name="status" value="unlisted">
-                  🔗 Unlisted -Sharable Link
-                </option>
-              </select>
+                options={securityOptions}
+              ></Dropdown>
             </div>
           </div>
           <div className="tags-mood row">
@@ -223,18 +228,12 @@ const Create = () => {
             </div>
             <div className="mood input2">
               <label htmlFor="mood">Mood</label>
-              <select
-                name="mood-selection"
+              <Dropdown
                 id="mood"
-                onChange={(e) => setMood(e.target.value)}
                 value={mood}
-              >
-                <option value="happy">😊 Happy & Content</option>
-                <option value="sad">😢 Sad & Reflective</option>
-                <option value="excited">🤩 Excited & Inspired</option>
-                <option value="calm">😌 Peaceful & Calm</option>
-                <option value="thoughtful">🤔 Thoughtful & Curious</option>
-              </select>
+                onChange={(e) => setMood(e.target.value)}
+                options={moodOptions}
+              />
             </div>
           </div>
           <div className="attachment-container">
