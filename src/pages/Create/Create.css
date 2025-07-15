@@ -41,9 +41,7 @@
     margin-bottom: 0.5rem;
   }
   input,
-  textarea,
-  select,
-  option {
+  textarea {
     width: 100%;
     padding: 0.6rem 0.8rem;
     border-radius: 5px;
