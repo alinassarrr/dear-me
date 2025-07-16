@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import select from "../../custom/navSelect";
 import "./Create.css";
 import AttachmentBtn from "../../components/Create/Attachments/AttachmentBtn";
@@ -49,6 +49,15 @@ const Create = () => {
   const [mood, setMood] = useState("happy");
   const [tagInput, setTagInput] = useState("");
   const [capsules, setCapsules] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedAudio, setSelectedAudio] = useState("");
+  const [selectedMarkdown, setSelectedMarkdown] = useState("");
+
+  const attachChange = (e, setter) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setter(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
   const clear = () => {
     setcapsuleTitile("");
@@ -59,6 +68,9 @@ const Create = () => {
     setTags([]);
     setMood("happy");
     resetEmoji();
+    setSelectedAudio("");
+    setSelectedImage("");
+    setSelectedMarkdown("");
   };
 
   const resetEmoji = () => {
@@ -101,6 +113,9 @@ const Create = () => {
       security,
       tags,
       mood,
+      selectedImage,
+      selectedAudio,
+      selectedMarkdown,
     };
     for (let value in newCapsule) {
       if (!newCapsule[value] || !newCapsule[value].length) {
@@ -242,11 +257,23 @@ const Create = () => {
               <AttachmentBtn
                 src="icons/Create/upload.svg"
                 text="Upload Image"
+                accept="image/*"
+                onChange={(e) => attachChange(e, setSelectedImage)}
+                data={selectedImage}
               />
-              <AttachmentBtn src="icons/Create/mic.svg" text="Record Audio" />
+              <AttachmentBtn
+                src="icons/Create/mic.svg"
+                text="Record Audio"
+                accept="audio/*"
+                onChange={(e) => attachChange(e, setSelectedAudio)}
+                data={selectedAudio}
+              />
               <AttachmentBtn
                 src="icons/Create/file-code.svg"
-                text="Add Text Note"
+                text="Markdown Note"
+                accept=".xml, .html, .md"
+                onChange={(e) => attachChange(e, setSelectedMarkdown)}
+                data={selectedMarkdown}
               />
             </div>
           </div>
