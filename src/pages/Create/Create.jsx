@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import select from "../../custom/navSelect";
 import "./Create.css";
 import AttachmentBtn from "../../components/Create/Attachments/AttachmentBtn";
@@ -6,8 +6,11 @@ import InputField from "../../components/Common/Input/InputField";
 import Button from "../../components/Common/Button/Button";
 import Tag from "../../components/Common/Tags/Tag";
 import Dropdown from "../../components/Common/Dropdown/Dropdown";
-
+import { useNavigate } from "react-router-dom";
+import Public from "../PublicWall/Public";
 const Create = () => {
+  const navigate = useNavigate();
+
   const emojis = [
     { emoji: "🎯", value: "Focused Goal" },
     { emoji: "⭐", value: "Achievement" },
@@ -39,7 +42,7 @@ const Create = () => {
     { value: "unlisted", text: "🔗 Unlisted -Sharable Link" },
   ];
 
-  const [capsuleTitile, setcapsuleTitile] = useState("");
+  const [capsuleTitle, setcapsuleTitle] = useState("");
   const [revealDate, setRevealDate] = useState("");
   const [message, setMessage] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("");
@@ -60,7 +63,7 @@ const Create = () => {
   };
 
   const clear = () => {
-    setcapsuleTitile("");
+    setcapsuleTitle("");
     setRevealDate("");
     setMessage("");
     setSelectedEmoji("");
@@ -106,7 +109,7 @@ const Create = () => {
 
   const create = () => {
     const newCapsule = {
-      capsuleTitile,
+      capsuleTitle,
       revealDate,
       message,
       selectedEmoji,
@@ -118,13 +121,20 @@ const Create = () => {
       selectedMarkdown,
     };
     for (let value in newCapsule) {
-      if (!newCapsule[value] || !newCapsule[value].length) {
-        console.log("Still missing", value);
-        return;
+      if (
+        value !== "selectedImage" &&
+        value !== "selectedAudio" &&
+        value !== "selectedMarkdown"
+      ) {
+        if (!newCapsule[value] || !newCapsule[value].length) {
+          console.log("Still missing", value);
+          return;
+        }
       }
     }
     setCapsules([...capsules, newCapsule]);
     clear();
+    navigate("/public");
   };
 
   useEffect(() => {
@@ -148,9 +158,9 @@ const Create = () => {
               type="text"
               id="title"
               placeholder="My future self..."
-              value={capsuleTitile}
+              value={capsuleTitle}
               onChange={(e) => {
-                setcapsuleTitile(e.target.value);
+                setcapsuleTitle(e.target.value);
               }}
             />
 
