@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import select from "../hooks/navSelect";
-import HeroBtn from "../components/Landing/HeroBtn";
-import InfoCard from "../components/Landing/InfoCard";
+import select from "../../custom/navSelect";
+import HeroBtn from "../../components/Landing/HeroBtn";
+import InfoCard from "../../components/Landing/InfoCard";
 import "./Home.css";
 
 const Home = () => {
@@ -49,7 +49,7 @@ const Home = () => {
       </section>
       <section className="info">
         <div className="container">
-          <h3>Preserve Your Memories Across Time</h3>
+          <h3 className="sec-title">Preserve Your Memories Across Time</h3>
           <div className="info-cards">
             {cardContent.map((card) => {
               return (

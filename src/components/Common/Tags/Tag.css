@@ -1,0 +1,12 @@
+.tag {
+  border-radius: 10px;
+  padding: var(--space-sm) var(--space-sm);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  width: fit-content;
+  font-size: var(--font-sm);
+  cursor: pointer;
+}
+.tag:hover {
+  background-color: var(--color-bg3);
+}

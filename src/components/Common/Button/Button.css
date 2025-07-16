@@ -1,0 +1,16 @@
+.button {
+  padding: var(--space-md) var(--space-md);
+  border-radius: 5px;
+  color: var(--color-text);
+  border: 0;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: var(--color-sec);
+}
+.button-dark {
+  background-color: var(--color-primary);
+}
+.button-clear {
+  background-color: var(--color-bg3);
+}
