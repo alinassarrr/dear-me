@@ -3,6 +3,7 @@ import select from "../../custom/navSelect";
 import Dropdown from "../../components/Common/Dropdown/Dropdown";
 import "./Public.css";
 import Filter from "../../components/Public/Filter/Filter";
+import CapsuleCard from "../../components/Common/CapsuleCard/CapsuleCard";
 const Public = () => {
   useEffect(() => {
     select("public");
@@ -33,7 +34,7 @@ const Public = () => {
   return (
     <div className="public-capsule container">
       <div className="title">
-        <h3 className="sec-title">Public Time Capsule Wall</h3>
+        <h3 className="sec-title">🌐 Public Time Capsule Wall</h3>
         <p>
           Discover messages from around the world that have been unlocked and
           shared publicly
@@ -55,7 +56,14 @@ const Public = () => {
           setEndDate={setEndDate}
         />
       </section>
-      <section className="capsules-list"></section>
+      <div className="results">
+        <p>Showing 3 of 3 public capsules </p>
+      </div>
+      <section className="capsules-list">
+        <CapsuleCard />
+        <CapsuleCard />
+        <CapsuleCard />
+      </section>
     </div>
   );
 };
