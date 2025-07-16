@@ -2,15 +2,32 @@
   background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  align-self: center;
+  padding: 2rem 2rem;
   gap: 1rem;
   border-radius: 5px;
   color: var(--color-text);
   border: 0;
   width: 30%;
   cursor: pointer;
+  text-align: center;
+  min-height: 120px;
+  p {
+    margin-top: 1rem;
+  }
 }
 .attach:hover {
   background-color: var(--color-primary);
+}
+.hidden-input {
+  display: none;
+}
+.uploaded {
+  font-weight: bold;
+  font-size: var(--font-lg);
+}
+.audio {
+  max-width: 100%;
 }
