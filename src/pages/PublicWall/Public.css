@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 2rem;
   .title {
-    background-color: var(--color-bg4);
+    background-color: var(--color-sec);
     padding: var(--space-md);
     border-radius: 5px;
   }
@@ -12,5 +12,10 @@
     justify-content: flex-end;
     background-color: var(--color-bg2);
     border-radius: 5px;
+  }
+  .capsules-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
   }
 }
