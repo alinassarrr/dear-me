@@ -1,17 +1,33 @@
 import "./AttachmentBtn.css";
 const AttachmentBtn = (props) => {
+  const { src, text, accept, onChange, data } = props;
+
   return (
-    <button
-      className="attach"
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-    >
+    <label className="attach">
+      <input
+        type="file"
+        accept={accept}
+        className="hidden-input"
+        onChange={onChange}
+      />
       <div className="attach-icon">
-        <img src={props.src} alt="" />
+        {!data ? (
+          <>
+            <img src={src} alt={src} />
+            <p>{text}</p>
+          </>
+        ) : accept === "image/*" ? (
+          <img src={data} alt={data} className="full-img" />
+        ) : // <audio src={data} controls />
+        accept === "audio/*" ? (
+          <audio src={data} controls className="audio" />
+        ) : (
+          <>
+            <p className="uploaded">File Uploaded!</p>
+          </>
+        )}
       </div>
-      <p>{props.text}</p>
-    </button>
+    </label>
   );
 };
 
