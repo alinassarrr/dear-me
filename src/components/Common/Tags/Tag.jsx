@@ -1,8 +1,8 @@
 import "./Tag.css";
-const Tag = ({ text, onClick }) => {
+const Tag = ({ text, onClick, stable }) => {
   return (
     <div className="tag" onClick={onClick}>
-      {text} x
+      #{!stable ? <>{text} x </> : <>{text}</>}
     </div>
   );
 };

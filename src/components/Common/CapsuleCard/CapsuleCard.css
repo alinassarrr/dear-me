@@ -1,0 +1,81 @@
+.capsule-card {
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-text);
+
+  .top {
+    padding: var(--space-md);
+
+    border-bottom: 1px solid var(--color-bg);
+    gap: 1rem;
+
+    .emoji-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      .title-owner {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      h3 {
+        font-size: var(--font-lg);
+      }
+
+      .emoji {
+        font-size: var(--font-3xl);
+      }
+      p {
+        font-size: var(--font-sm);
+      }
+    }
+    .left-right {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .right {
+      .icon-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .message {
+    padding: var(--space-md);
+    min-height: 130px;
+    line-height: 1.6;
+  }
+  .bottom {
+    padding: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-bg);
+    color: var(--color-text2);
+    p {
+      font-size: var(--font-sm);
+    }
+    .location,
+    .created {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .icon {
+      width: 20px;
+    }
+  }
+}
+.capsule-card:hover {
+  scale: 1.05;
+}

@@ -8,6 +8,7 @@ header {
   left: 0;
   right: 0;
   height: 80px;
+  z-index: 100;
 }
 nav ul {
   display: flex;

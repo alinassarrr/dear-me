@@ -1,5 +1,6 @@
 const InputField = (props) => {
-  const { title, type, id, placeholder, className, onChange, value } = props;
+  const { title, type, id, placeholder, className, onChange, value, ...rest } =
+    props;
   return (
     <div className={className}>
       <label htmlFor={id}>{title}</label>
@@ -10,6 +11,7 @@ const InputField = (props) => {
         required
         value={value}
         onChange={onChange}
+        {...rest}
       />
     </div>
   );
