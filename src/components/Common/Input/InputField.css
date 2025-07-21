@@ -1,0 +1,16 @@
+input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 5px;
+  background-color: var(--color-bg);
+  outline-color: var(--color-primary);
+  border: 0px;
+  color: var(--color-text);
+  font-size: var(--font-sm);
+}
+label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--font-base);
+  margin-bottom: 0.5rem;
+}
