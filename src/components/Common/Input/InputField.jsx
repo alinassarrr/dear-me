@@ -1,3 +1,4 @@
+import "./InputField.css";
 const InputField = (props) => {
   const { title, type, id, placeholder, className, onChange, value, ...rest } =
     props;

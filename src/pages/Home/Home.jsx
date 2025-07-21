@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import select from "../../custom/navSelect";
 import HeroBtn from "../../components/Landing/HeroBtn";
 import InfoCard from "../../components/Landing/InfoCard";
 import "./Home.css";
@@ -23,9 +21,6 @@ const Home = () => {
       icon: `${iconPath}/sparkles.svg`,
     },
   ];
-  useEffect(() => {
-    select("home");
-  }, []);
 
   return (
     <div className="home">
@@ -51,12 +46,13 @@ const Home = () => {
         <div className="container">
           <h3 className="sec-title">Preserve Your Memories Across Time</h3>
           <div className="info-cards">
-            {cardContent.map((card) => {
+            {cardContent.map((card, index) => {
               return (
                 <InfoCard
                   title={card.title}
                   desc={card.desc}
                   icon={card.icon}
+                  key={index}
                 />
               );
             })}

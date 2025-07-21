@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-import select from "../../custom/navSelect";
+import React, { useState } from "react";
 import Dropdown from "../../components/Common/Dropdown/Dropdown";
 import "./Public.css";
 import Filter from "../../components/Public/Filter/Filter";
 import CapsuleCard from "../../components/Common/CapsuleCard/CapsuleCard";
 const Public = () => {
-  useEffect(() => {
-    select("public");
-  }, []);
-
   const countryOption = [
     { value: null, text: "All Countries" },
     { value: "US", text: "United States" },
