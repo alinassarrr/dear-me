@@ -1,145 +1,67 @@
-import { useEffect, useState } from "react";
-import select from "../../custom/navSelect";
+import { useState } from "react";
 import "./Create.css";
-import AttachmentBtn from "../../components/Create/Attachments/AttachmentBtn";
-import InputField from "../../components/Common/Input/InputField";
 import Button from "../../components/Common/Button/Button";
-import Tag from "../../components/Common/Tags/Tag";
-import Dropdown from "../../components/Common/Dropdown/Dropdown";
 import { useNavigate } from "react-router-dom";
-import Public from "../PublicWall/Public";
+import TitleDate from "../../components/Create/TitleDate/TitleDate";
+import TextArea from "../../components/Create/TextArea/TextArea";
+import EmojiPrivacy from "../../components/Create/EmojiPrivacy/EmojiPrivacy";
+import TagMood from "../../components/Create/TagMood/TagMood";
+import AttachmentBlock from "../../components/Create/Attachments/AttachmentBlock";
+import axios from "axios";
+const path = import.meta.env.VITE_BASE_URL;
+
 const Create = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user.token;
+
   const navigate = useNavigate();
 
-  const emojis = [
-    { emoji: "🎯", value: "Focused Goal" },
-    { emoji: "⭐", value: "Achievement" },
-    { emoji: "❤️", value: "Love & Emotion" },
-    { emoji: "🚀", value: "Ambition & Growth" },
-    { emoji: "🎭", value: "Life Drama" },
-    { emoji: "💎", value: "Treasure & Value" },
-    { emoji: "💭", value: "Dreams & Thoughts" },
-    { emoji: "📅", value: "Marked Moment" },
-    { emoji: "🛤️", value: "Personal Journey" },
-    { emoji: "🧭", value: "Direction & Purpose" },
-    { emoji: "🧠", value: "Memory & Mind" },
-    { emoji: "🌠", value: "Wish & Hope" },
-    { emoji: "📸", value: "Captured Memory" },
-    { emoji: "💡", value: "Inspiration" },
-  ];
+  const [formData, setFormData] = useState({
+    title: "",
+    reveal_at: "",
+    message: "",
+    emoji: "",
+    security: "private",
+    mood_id: 1,
+    tags: [],
+    surprise: false,
+    image_path: null,
+    audio_path: null,
+    file_path: null,
+  });
 
-  const moodOptions = [
-    { value: "happy", text: "😊 Happy & Content" },
-    { value: "sad", text: "😢 Sad & Reflective" },
-    { value: "excited", text: "🤩 Excited & Inspired" },
-    { value: "calm", text: "😌 Peaceful & Calm" },
-    { value: "thoughtful", text: "🤔 Thoughtful & Curious" },
-  ];
-
-  const securityOptions = [
-    { value: "private", text: "🔒 Private - Only You" },
-    { value: "public", text: "🌍 Public - Everyone" },
-    { value: "unlisted", text: "🔗 Unlisted -Sharable Link" },
-  ];
-
-  const [capsuleTitle, setcapsuleTitle] = useState("");
-  const [revealDate, setRevealDate] = useState("");
-  const [message, setMessage] = useState("");
-  const [selectedEmoji, setSelectedEmoji] = useState("");
-  const [selectedEmojiText, setSelectedEmojiText] = useState("");
-  const [security, setsecurity] = useState("private");
-  const [tags, setTags] = useState([]);
-  const [mood, setMood] = useState("happy");
-  const [tagInput, setTagInput] = useState("");
-  const [capsules, setCapsules] = useState([]);
-  const [selectedImage, setSelectedImage] = useState("");
-  const [selectedAudio, setSelectedAudio] = useState("");
-  const [selectedMarkdown, setSelectedMarkdown] = useState("");
-
-  const attachChange = (e, setter) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setter(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
-  const clear = () => {
-    setcapsuleTitle("");
-    setRevealDate("");
-    setMessage("");
-    setSelectedEmoji("");
-    setsecurity("private");
-    setTags([]);
-    setMood("happy");
-    resetEmoji();
-    setSelectedAudio("");
-    setSelectedImage("");
-    setSelectedMarkdown("");
-  };
-
-  const resetEmoji = () => {
-    const all = document.querySelectorAll(".emoji");
-    all.forEach((emoji) => {
-      emoji.classList.remove("selected");
-    });
-    setSelectedEmojiText("");
-  };
-  const selectEmoji = (e, target) => {
-    // console.log(e.emoji, target);
-    resetEmoji();
-    setSelectedEmoji(e.emoji);
-    setSelectedEmojiText(e.value);
-    target.classList.add("selected");
-  };
-
-  const addTag = () => {
-    if (tagInput) {
-      setTags([...tags, tagInput]);
-      setTagInput("");
-    }
-  };
-  const removeTag = (index) => {
-    const newTag = [...tags];
-    newTag.splice(index, 1);
-    setTags(newTag);
-  };
-
-  useEffect(() => {
-    select("create");
-  }, []);
-
-  const create = () => {
-    const newCapsule = {
-      capsuleTitle,
-      revealDate,
-      message,
-      selectedEmoji,
-      security,
-      tags,
-      mood,
-      selectedImage,
-      selectedAudio,
-      selectedMarkdown,
-    };
-    for (let value in newCapsule) {
+  const create = async () => {
+    for (let key in formData) {
       if (
-        value !== "selectedImage" &&
-        value !== "selectedAudio" &&
-        value !== "selectedMarkdown"
+        key !== "image_path" &&
+        key !== "audio_path" &&
+        key !== "file_path" &&
+        key !== "surprise"
       ) {
-        if (!newCapsule[value] || !newCapsule[value].length) {
-          console.log("Still missing", value);
+        if (!formData[key] || !formData[key].length) {
+          console.log("Still missing", key);
           return;
         }
       }
     }
-    setCapsules([...capsules, newCapsule]);
-    clear();
-    navigate("/public");
-  };
+    const finalData = {
+      ...formData,
+      tags: JSON.stringify(formData.tags),
+    };
 
-  useEffect(() => {
-    console.log(capsules);
-  }, [capsules.length]);
+    try {
+      const response = await axios.post(`${path}/create/`, finalData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+    // clear();
+    // navigate("/public");
+  };
 
   return (
     <div className="create-form form-container">
@@ -151,155 +73,49 @@ const Create = () => {
           <h3 className="sec-title"> Create Your Time Capsule</h3>
         </div>
         <div className="content">
-          <div className="title-date row">
-            <InputField
-              className="input1"
-              title="Capsule Title"
-              type="text"
-              id="title"
-              placeholder="My future self..."
-              value={capsuleTitle}
-              onChange={(e) => {
-                setcapsuleTitle(e.target.value);
-              }}
-            />
+          <TitleDate
+            capsuleTitle={formData.title}
+            setData={setFormData}
+            revealDate={formData.reveal_at}
+            form={formData}
+          />
+          <TextArea
+            setData={setFormData}
+            message={formData.message}
+            form={formData}
+          />
+          <EmojiPrivacy form={formData} setData={setFormData} />
 
-            <InputField
-              className="input2"
-              title="Reveal Date"
-              type="datetime-local"
-              id="date"
-              value={revealDate}
-              onChange={(e) => {
-                setRevealDate(e.target.value);
-              }}
-            />
-          </div>
+          <TagMood form={formData} setData={setFormData} />
 
-          <div className="message">
-            <label htmlFor="message">Your Message</label>
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Write a message to your future self or to the world..."
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-            ></textarea>
-          </div>
-          <div className="emojis-privacy row">
-            <div className="input1">
-              <div className="head">
-                <label htmlFor="">Choose Emoji</label>
-                <p>{selectedEmojiText}</p>
-              </div>
-              <div className="emojis">
-                {emojis.map((e, index) => (
-                  <div
-                    key={index}
-                    className="emoji"
-                    onClick={(event) => {
-                      selectEmoji(e, event.currentTarget);
-                    }}
-                  >
-                    {e.emoji}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="privacy input2">
-              <label htmlFor="">Privacy Settings</label>
-              <Dropdown
-                id="security"
-                onChange={(e) => setsecurity(e.target.value)}
-                value={security}
-                options={securityOptions}
-              ></Dropdown>
-            </div>
-          </div>
-          <div className="tags-mood row">
-            <div className="tags input1">
-              <label htmlFor="tag">Tags</label>
-              <div className="tag-comb">
-                <input
-                  type="text"
-                  id="tag"
-                  value={tagInput}
-                  placeholder="Add a tag..."
-                  onChange={(e) => {
-                    setTagInput(e.target.value);
-                  }}
-                />
-                <button
-                  className="tag-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    addTag();
-                  }}
-                >
-                  <img src="icons/Create/tag.svg" alt="" />
-                </button>
-              </div>
-              <div className="tags-list">
-                {tags.map((tag, index) => (
-                  <Tag
-                    key={index}
-                    text={tag}
-                    onClick={() => {
-                      removeTag(index);
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="mood input2">
-              <label htmlFor="mood">Mood</label>
-              <Dropdown
-                id="mood"
-                value={mood}
-                onChange={(e) => setMood(e.target.value)}
-                options={moodOptions}
-              />
-            </div>
-          </div>
-          <div className="attachment-container">
-            <label>Attachments (Optional)</label>
-            <div className="attachments">
-              <AttachmentBtn
-                src="icons/Create/upload.svg"
-                text="Upload Image"
-                accept="image/*"
-                onChange={(e) => attachChange(e, setSelectedImage)}
-                data={selectedImage}
-              />
-              <AttachmentBtn
-                src="icons/Create/mic.svg"
-                text="Record Audio"
-                accept="audio/*"
-                onChange={(e) => attachChange(e, setSelectedAudio)}
-                data={selectedAudio}
-              />
-              <AttachmentBtn
-                src="icons/Create/file-code.svg"
-                text="Markdown Note"
-                accept=".xml, .html, .md"
-                onChange={(e) => attachChange(e, setSelectedMarkdown)}
-                data={selectedMarkdown}
-              />
-            </div>
-          </div>
-          {/* <div className="additional">
-            <textarea name="" id=""></textarea>
-          </div> */}
-          <div className="location">
-            <img src="icons/Create/map-pin.svg" alt="location" />
-            <p>
-              Location and IP address will be automatically captured for this
-              capsule
-            </p>
-          </div>
+          <AttachmentBlock form={formData} setData={setFormData} />
+        </div>
+        <div className="surprise">
+          <input
+            className="checkbox"
+            type="checkbox"
+            id="surprise"
+            checked={formData.surprise}
+            onChange={(e) => {
+              setFormData({ ...formData, surprise: e.target.checked });
+              console.log(e.target.checked);
+            }}
+          />
+          <label htmlFor="surprise">Surprise Mode </label>
+        </div>
+        <div className="location">
+          <img src="icons/Create/map-pin.svg" alt="location" />
+          <p>
+            Location and IP address will be automatically captured for this
+            capsule
+          </p>
         </div>
         <div className="form-buttons">
-          <Button text="Clear" onClick={clear} className={"button-clear"} />
+          <Button
+            text="Clear"
+            // onClick={clear}
+            className={"button-clear"}
+          />
           <Button
             text="Create time capsule"
             onClick={create}

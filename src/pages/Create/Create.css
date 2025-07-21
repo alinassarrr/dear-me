@@ -132,4 +132,26 @@
     gap: 0.4rem;
     padding-top: var(--space-md);
   }
+  .surprise {
+    display: flex;
+    justify-self: flex-end;
+    right: 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    background-color: var(--color-bg);
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    border-radius: 5px;
+
+    label {
+      font-weight: bold;
+      align-self: center;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+  }
+  .surprise .checkbox {
+    width: 16px;
+    cursor: pointer;
+  }
 }
