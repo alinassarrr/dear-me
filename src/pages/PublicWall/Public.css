@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 2rem;
   .title {
-    background-color: var(--color-sec);
+    background-color: var(--color-bg4);
     padding: var(--space-md);
     border-radius: 5px;
   }
