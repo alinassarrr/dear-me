@@ -1,0 +1,48 @@
+.profile {
+  min-height: 100dvh;
+}
+.user-section {
+  padding: 2rem 3rem;
+  background-color: var(--color-bg2);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  .name-email {
+    font-size: var(--font-md);
+    display: flex;
+    gap: 2rem;
+
+    .name {
+      font-size: var(--font-xl);
+      font-weight: 600;
+    }
+  }
+  .stats {
+    display: flex;
+    text-align: center;
+    gap: 1rem;
+
+    .total {
+      .text {
+        width: 100%;
+        font-size: var(--font-md);
+      }
+      .number {
+        font-size: var(--font-2xl);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    gap: 2rem;
+  }
+}
+.capsules-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}

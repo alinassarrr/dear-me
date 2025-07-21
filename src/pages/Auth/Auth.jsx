@@ -4,6 +4,8 @@ import SignUp from "../../components/Auth/SignUp";
 import "./Auth.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const path = import.meta.env.VITE_BASE_URL;
+
 const Auth = () => {
   const [form, setForm] = useState(true);
   const [email, setEmail] = useState("");
@@ -28,13 +30,10 @@ const Auth = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v0.1/guest/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${path}/guest/login`, {
+        email,
+        password,
+      });
       localStorage.setItem("user", JSON.stringify(response.data.data));
       localStorage.setItem("token", response.data.data.token);
       navigate("/");
