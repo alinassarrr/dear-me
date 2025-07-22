@@ -1,11 +1,25 @@
 import React from "react";
 import Dropdown from "../../Common/Dropdown/Dropdown";
 import "./Filter.css";
+
+const countryOption = [
+  { value: "", text: "All Countries" },
+  { value: "United States", text: "United States" },
+  { value: "Lebanon", text: "Lebanon" },
+  { value: "France", text: "France" },
+  { value: "Spain", text: "Spain" },
+];
+const moodOptions = [
+  { value: "", text: "All Moods" },
+  { value: "happy", text: "😊 Happy & Content" },
+  { value: "sad", text: "😢 Sad & Reflective" },
+  { value: "excited", text: "🤩 Excited & Inspired" },
+  { value: "calm", text: "😌 Peaceful & Calm" },
+  { value: "thoughtful", text: "🤔 Thoughtful & Curious" },
+];
 const Filter = ({
-  countryOption,
   setCountry,
   country,
-  moodOptions,
   setMood,
   mood,
   show,
@@ -29,7 +43,6 @@ const Filter = ({
         onChange={(e) => setMood(e.target.value)}
         value={mood}
       />
-      {/* <Dropdown id="country-select" options={countries} /> */}
       <div className="custom-select">
         <div className="filter" onMouseOver={() => setShow(!show)}>
           Select Time Range
@@ -58,7 +71,6 @@ const Filter = ({
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </label>
-            <button className="save">Save</button>
           </div>
         ) : null}
       </div>
