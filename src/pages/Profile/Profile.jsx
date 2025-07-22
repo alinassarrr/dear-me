@@ -1,44 +1,11 @@
-import React, { useEffect, useState } from "react";
 import Button from "../../components/Common/Button/Button";
 import "./Profile.css";
 import CapsuleCard from "../../components/Common/CapsuleCard/CapsuleCard";
-import axios from "axios";
-const path = import.meta.env.VITE_BASE_URL;
+import { useProfileLogic } from "./ProfileLogic";
 
 const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  // console.log(user.username);
-  const token = user.token;
-  const username = user.username;
-  const email = user.email;
-  const [capsules, setCapsules] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [revealed, setRevealed] = useState(0);
-  const [waiting, setWaiting] = useState(0);
-
-  useEffect(() => {
-    userCapsules();
-  }, []);
-
-  const userCapsules = async () => {
-    try {
-      const response = await axios.get(`${path}/profile/my-capsules`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const allCaps = response.data.data;
-      setCapsules(allCaps);
-      setTotal(allCaps.length);
-      const revealed = allCaps.filter((cap) => cap.revealed);
-      // console.log(revealed);
-      setRevealed(revealed.length);
-      setWaiting(allCaps.length - revealed.length);
-    } catch (error) {
-      console.log("Error fetching capsules:", error);
-    }
-  };
-
+  const [username, email, capsules, total, revealed, waiting] =
+    useProfileLogic();
   return (
     <div className="profile container">
       <section className="user-section">
