@@ -1,71 +1,19 @@
-import { useState } from "react";
 import "./Create.css";
 import Button from "../../components/Common/Button/Button";
-import { useNavigate } from "react-router-dom";
 import TitleDate from "../../components/Create/TitleDate/TitleDate";
 import TextArea from "../../components/Create/TextArea/TextArea";
 import EmojiPrivacy from "../../components/Create/EmojiPrivacy/EmojiPrivacy";
 import TagMood from "../../components/Create/TagMood/TagMood";
 import AttachmentBlock from "../../components/Create/Attachments/AttachmentBlock";
-import axios from "axios";
-const path = import.meta.env.VITE_BASE_URL;
+import { useCreateLogic } from "./CreateLogic";
 
 const Create = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = user.token;
-
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    title: "",
-    reveal_at: "",
-    message: "",
-    emoji: "",
-    security: "private",
-    mood_id: 1,
-    tags: [],
-    surprise: false,
-    image_path: null,
-    audio_path: null,
-    file_path: null,
-  });
-
-  const create = async () => {
-    for (let key in formData) {
-      if (
-        key !== "image_path" &&
-        key !== "audio_path" &&
-        key !== "file_path" &&
-        key !== "surprise"
-      ) {
-        if (!formData[key] || !formData[key].length) {
-          console.log("Still missing", key);
-          return;
-        }
-      }
-    }
-    const finalData = {
-      ...formData,
-      tags: JSON.stringify(formData.tags),
-    };
-
-    try {
-      const response = await axios.post(`${path}/create/`, finalData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
-    // clear();
-    // navigate("/public");
-  };
+  const [formData, setFormData, create, clear] = useCreateLogic();
 
   return (
     <div className="create-form form-container">
       <form action="">
+        {/* Section title */}
         <div className="title">
           <div className="title-icon">
             <img src="icons/Create/hourglass.svg" alt="" />
@@ -73,23 +21,27 @@ const Create = () => {
           <h3 className="sec-title"> Create Your Time Capsule</h3>
         </div>
         <div className="content">
+          {/* Title - Date Block */}
           <TitleDate
             capsuleTitle={formData.title}
             setData={setFormData}
             revealDate={formData.reveal_at}
             form={formData}
           />
+          {/*TextArea */}
           <TextArea
             setData={setFormData}
             message={formData.message}
             form={formData}
           />
+          {/*Emoji - Privacy Block */}
           <EmojiPrivacy form={formData} setData={setFormData} />
-
+          {/*Tag - Mood Block */}
           <TagMood form={formData} setData={setFormData} />
-
+          {/*AttachmentBlock */}
           <AttachmentBlock form={formData} setData={setFormData} />
         </div>
+        {/*Surpise check */}
         <div className="surprise">
           <input
             className="checkbox"
@@ -110,12 +62,9 @@ const Create = () => {
             capsule
           </p>
         </div>
+        {/* Form Buttons */}
         <div className="form-buttons">
-          <Button
-            text="Clear"
-            // onClick={clear}
-            className={"button-clear"}
-          />
+          <Button text="Clear" onClick={clear} className={"button-clear"} />
           <Button
             text="Create time capsule"
             onClick={create}

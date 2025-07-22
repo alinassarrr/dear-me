@@ -23,9 +23,12 @@ const TitleDate = ({ capsuleTitle, revealDate, setData, form }) => {
         id="date"
         value={revealDate}
         onChange={(e) => {
-          setData({ ...form, reveal_at: e.target.value });
+          const rawDateTime = e.target.value;
+          const mysqlFormat = rawDateTime.replace("T", " ") + ":00";
+          setData({ ...form, reveal_at: mysqlFormat });
+          console.log(e.target.value);
         }}
-        min={new Date().toISOString().split("T")[0]}
+        min={new Date().toISOString().slice(0, 16)}
       />
     </div>
   );
