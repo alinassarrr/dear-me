@@ -63,7 +63,9 @@ const TagMood = ({ form, setData }) => {
         <Dropdown
           id="mood"
           value={form.mood_id}
-          onChange={(e) => setData({ ...form, mood_id: e.target.value })}
+          onChange={(e) =>
+            setData({ ...form, mood_id: parseInt(e.target.value) })
+          }
           options={moodOptions}
         />
       </div>
