@@ -1,5 +1,8 @@
 import Tag from "../Tags/Tag";
 import "./CapsuleModal.css";
+import JSZip from "jszip";
+import html2canvas from "html2canvas";
+import { saveAs } from "file-saver";
 
 const CapsuleModal = ({ isOpen, onClose, capsuleData }) => {
   if (!isOpen) return null;
@@ -18,6 +21,58 @@ const CapsuleModal = ({ isOpen, onClose, capsuleData }) => {
     const reveal = new Date(revealAt.replace(" ", "T"));
     const diff = reveal - created;
     return Math.floor(diff / (1000 * 60 * 60 * 24));
+  };
+  // thanks to hindi man : https://www.youtube.com/watch?v=mfPAX0R6k1M
+  const exportZip = async () => {
+    const zip = new JSZip();
+    const folder = zip.folder(`${capsuleData.title}_capsule`);
+    try {
+      // 1. screenshot of the modal (like in the video)
+      const modal = document.querySelector(".modal");
+      const canvas = await html2canvas(modal, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+      });
+      canvas.toBlob((blob) => {
+        folder.file("capsule_screenshot.png", blob);
+      }, "image/png");
+      // 2. Add text file with structured data
+      const textContent =
+        `Exported Capsule\n\n` +
+        `Title: ${capsuleData.title}\n` +
+        `Created: ${formatDate(capsuleData.created_at)}\n` +
+        `Revealed: ${formatDate(capsuleData.reveal_at)}\n` +
+        `Message:\n${capsuleData.message}\n\n` +
+        `Tags: ${capsuleData.tags?.join(", ") || "None"}`;
+      folder.file("details.txt", textContent);
+
+      // 3. Add attachments (adapted from your previous code)
+      const addAttachment = async (path, filename) => {
+        try {
+          const response = await fetch(`http://127.0.0.1:8000/storage/${path}`);
+          const blob = await response.blob();
+          folder.file(filename, blob);
+        } catch (error) {
+          console.warn(`Failed to fetch ${filename}`, error);
+        }
+      };
+
+      if (capsuleData.image_path) {
+        await addAttachment(capsuleData.image_path, "capsule_image");
+      }
+
+      if (capsuleData.audio_path) {
+        await addAttachment(capsuleData.audio_path, "capsule_audio");
+      }
+
+      // 4. Generate and download ZIP
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, `${capsuleData.title}_capsule.zip`);
+    } catch (error) {
+      console.error("Export failed:", error);
+      alert("Export failed. Please check console for details.");
+    }
   };
 
   return (
@@ -114,6 +169,9 @@ const CapsuleModal = ({ isOpen, onClose, capsuleData }) => {
               </div>
             </div>
           )}
+        </div>
+        <div className="export" onClick={exportZip}>
+          Export Capsule
         </div>
       </div>
     </div>

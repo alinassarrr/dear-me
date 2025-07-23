@@ -185,4 +185,13 @@
     gap: 0.5rem;
     margin-top: 0.5rem;
   }
+
+  .export {
+    background-color: var(--color-primary);
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    width: fit-content;
+    border-radius: 5px;
+  }
 }
