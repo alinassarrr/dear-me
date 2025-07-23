@@ -1,0 +1,32 @@
+name: Dear Me
+
+on:
+  push:
+    branches: [ main,dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run ESLint (linter)
+      - name: Lint with ESLint
+        run: npm run lint
+
+      # Build the Vite project
+      - name: Build with Vite
+        run: npm run build
