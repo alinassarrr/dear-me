@@ -4,12 +4,20 @@ import "./Public.css";
 import Filter from "../../components/Public/Filter/Filter";
 import CapsuleCard from "../../components/Common/CapsuleCard/CapsuleCard";
 import axios from "axios";
+import CapsuleModal from "../../components/Common/Modal/CapsuleModal";
+import { useNavigate } from "react-router-dom";
 
 const path = import.meta.env.VITE_BASE_URL;
 
 const Public = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const token = user.token;
+  const token = user?.token;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!token) {
+      navigate("/signup");
+    }
+  }, [token, navigate]);
 
   const [show, setShow] = useState(false);
   const [country, setCountry] = useState("");

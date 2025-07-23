@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthApi } from "../../hooks/custom/AuthApiCall";
 import axios from "axios";
 
@@ -19,6 +19,13 @@ export const useCreateLogic = () => {
   const [path, token, navigate] = useAuthApi();
 
   const [formData, setFormData] = useState(form);
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/signup");
+    }
+  }, []);
+
   const clear = () => {
     setFormData(form);
   };

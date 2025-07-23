@@ -4,8 +4,16 @@ import CapsuleCard from "../../components/Common/CapsuleCard/CapsuleCard";
 import { useProfileLogic } from "./ProfileLogic";
 
 const Profile = () => {
-  const [username, email, capsules, total, revealed, waiting] =
-    useProfileLogic();
+  const [
+    username,
+    email,
+    capsules,
+    total,
+    revealed,
+    waiting,
+    navigate,
+    logout,
+  ] = useProfileLogic();
   return (
     <div className="profile container">
       <section className="user-section">
@@ -28,8 +36,17 @@ const Profile = () => {
           </div>
         </div>
         <div className="actions">
-          <Button text="+ New Capsule" className={"button-dark"} />
-          <Button text="Edit Profile" className={"button-clear"} />
+          <Button
+            text="+ New Capsule"
+            className={"button-dark"}
+            onClick={() => navigate("/create")}
+          />
+          <Button text="✍🏻 Edit Profile" className={"button-clear"} />
+          <Button
+            text="👋🏻 Log Out"
+            className={"button-clear"}
+            onClick={logout}
+          />
         </div>
       </section>
       <section className="capsules-list">

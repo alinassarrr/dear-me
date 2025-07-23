@@ -16,6 +16,12 @@ export const useProfileLogic = () => {
     userCapsules();
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/signup");
+  };
+
   const userCapsules = async () => {
     try {
       const response = await axios.get(`${path}/profile/my-capsules`, {
@@ -35,5 +41,14 @@ export const useProfileLogic = () => {
     }
   };
 
-  return [username, email, capsules, total, revealed, waiting];
+  return [
+    username,
+    email,
+    capsules,
+    total,
+    revealed,
+    waiting,
+    navigate,
+    logout,
+  ];
 };
