@@ -41,7 +41,6 @@ const Profile = () => {
             className={"button-dark"}
             onClick={() => navigate("/create")}
           />
-          <Button text="✍🏻 Edit Profile" className={"button-clear"} />
           <Button
             text="👋🏻 Log Out"
             className={"button-clear"}
