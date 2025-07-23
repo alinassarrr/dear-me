@@ -11,6 +11,7 @@ export const useProfileLogic = () => {
   const [total, setTotal] = useState(0);
   const [revealed, setRevealed] = useState(0);
   const [waiting, setWaiting] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     userCapsules();
@@ -23,6 +24,7 @@ export const useProfileLogic = () => {
   };
 
   const userCapsules = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${path}/profile/my-capsules`, {
         headers: {
@@ -36,6 +38,7 @@ export const useProfileLogic = () => {
       // console.log(revealed);
       setRevealed(revealed.length);
       setWaiting(allCaps.length - revealed.length);
+      setLoading(false);
     } catch (error) {
       console.log("Error fetching capsules:", error);
     }
@@ -50,5 +53,6 @@ export const useProfileLogic = () => {
     waiting,
     navigate,
     logout,
+    loading,
   ];
 };
