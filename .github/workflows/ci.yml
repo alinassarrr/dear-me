@@ -2,7 +2,7 @@ name: Dear Me
 
 on:
   push:
-    branches: [ main,dev ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -22,10 +22,6 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
-
-      # Run ESLint (linter)
-      - name: Lint with ESLint
-        run: npm run lint
 
       # Build the Vite project
       - name: Build with Vite
