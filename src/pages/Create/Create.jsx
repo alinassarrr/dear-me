@@ -8,7 +8,8 @@ import AttachmentBlock from "../../components/Create/Attachments/AttachmentBlock
 import { useCreateLogic } from "./CreateLogic";
 
 const Create = () => {
-  const [formData, setFormData, create, clear] = useCreateLogic();
+  const [formData, setFormData, create, clear, loading, missing] =
+    useCreateLogic();
 
   return (
     <div className="create-form form-container">
@@ -69,8 +70,10 @@ const Create = () => {
             text="Create time capsule"
             onClick={create}
             className={"button-dark"}
+            disabled={loading}
           />
         </div>
+        {missing && <div className="toast error">{missing}</div>}
       </form>
     </div>
   );

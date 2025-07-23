@@ -13,6 +13,7 @@ const Profile = () => {
     waiting,
     navigate,
     logout,
+    loading,
   ] = useProfileLogic();
   return (
     <div className="profile container">
@@ -41,7 +42,6 @@ const Profile = () => {
             className={"button-dark"}
             onClick={() => navigate("/create")}
           />
-          <Button text="✍🏻 Edit Profile" className={"button-clear"} />
           <Button
             text="👋🏻 Log Out"
             className={"button-clear"}
@@ -49,13 +49,19 @@ const Profile = () => {
           />
         </div>
       </section>
-      <section className="capsules-list">
-        {capsules.length ? (
-          capsules.map((cap) => <CapsuleCard capsuleData={cap} key={cap.id} />)
-        ) : (
-          <div>NO DATA YET</div>
-        )}
-      </section>
+      {loading ? (
+        <div className="feedback">Loading...</div>
+      ) : (
+        <section className="capsules-list">
+          {capsules.length ? (
+            capsules.map((cap) => (
+              <CapsuleCard capsuleData={cap} key={cap.id} />
+            ))
+          ) : (
+            <div className="feedback">NO DATA YET</div>
+          )}
+        </section>
+      )}
     </div>
   );
 };

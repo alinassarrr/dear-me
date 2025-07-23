@@ -19,12 +19,20 @@ export const useCreateLogic = () => {
   const [path, token, navigate] = useAuthApi();
 
   const [formData, setFormData] = useState(form);
+  const [loading, setLoading] = useState(false);
+  const [missing, setMissing] = useState("");
 
   useEffect(() => {
     if (!token) {
       navigate("/signup");
     }
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMissing("");
+    }, 1000);
+  }, [missing]);
 
   const clear = () => {
     setFormData(form);
@@ -39,7 +47,7 @@ export const useCreateLogic = () => {
         key !== "mood_id"
       ) {
         if (!formData[key] || !formData[key].length) {
-          console.log("Still missing", key);
+          setMissing(`Still missing ${key}`);
           return;
         }
       }
@@ -49,7 +57,7 @@ export const useCreateLogic = () => {
       tags: JSON.stringify(formData.tags),
     };
     console.log("Submitting reveal_at:", formData.reveal_at);
-
+    setLoading(true);
     try {
       const response = await axios.post(`${path}/create/`, finalData, {
         headers: {
@@ -57,12 +65,14 @@ export const useCreateLogic = () => {
         },
       });
       console.log(response);
+      setLoading(false);
     } catch (e) {
       console.log("Error: ", e);
+      setLoading(false);
     }
     clear();
     navigate("/profile");
   };
 
-  return [formData, setFormData, create, clear];
+  return [formData, setFormData, create, clear, loading, missing];
 };

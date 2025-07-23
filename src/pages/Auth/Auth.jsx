@@ -82,6 +82,12 @@ const Auth = () => {
     setUsername("");
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setError("");
+    }, 1500);
+  }, [error, loading]);
+
   return (
     <>
       {error && <div className="toast error">{error}</div>}

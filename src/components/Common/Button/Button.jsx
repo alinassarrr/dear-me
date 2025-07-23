@@ -1,5 +1,5 @@
 import "./Button.css";
-const Button = ({ text, onClick, className }) => {
+const Button = ({ text, onClick, className, disabled = false }) => {
   return (
     <button
       className={`button + ${className}`}
@@ -7,6 +7,7 @@ const Button = ({ text, onClick, className }) => {
         e.preventDefault();
         onClick(onClick);
       }}
+      disabled={disabled}
     >
       {text}
     </button>
