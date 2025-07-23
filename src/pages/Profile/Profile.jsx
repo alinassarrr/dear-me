@@ -13,6 +13,7 @@ const Profile = () => {
     waiting,
     navigate,
     logout,
+    loading,
   ] = useProfileLogic();
   return (
     <div className="profile container">
@@ -48,13 +49,19 @@ const Profile = () => {
           />
         </div>
       </section>
-      <section className="capsules-list">
-        {capsules.length ? (
-          capsules.map((cap) => <CapsuleCard capsuleData={cap} key={cap.id} />)
-        ) : (
-          <div>NO DATA YET</div>
-        )}
-      </section>
+      {loading ? (
+        <div className="feedback">Loading...</div>
+      ) : (
+        <section className="capsules-list">
+          {capsules.length ? (
+            capsules.map((cap) => (
+              <CapsuleCard capsuleData={cap} key={cap.id} />
+            ))
+          ) : (
+            <div className="feedback">NO DATA YET</div>
+          )}
+        </section>
+      )}
     </div>
   );
 };
