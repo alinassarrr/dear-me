@@ -1,0 +1,51 @@
+.filters {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  background-color: var(--color-bg2);
+  padding: var(--space-md);
+  gap: 2rem;
+}
+.custom-select {
+  font-family: sans-serif;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 5px;
+  background-color: var(--color-bg);
+  outline-color: var(--color-primary);
+  border: 0px;
+  color: var(--color-text);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.filter-dropdown {
+  display: none;
+  margin-top: 1.5rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg2);
+  padding: 1rem;
+  gap: 1rem;
+
+  input {
+    width: 100%;
+  }
+  .filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .save {
+    border-radius: 5px;
+    color: var(--color-text);
+    background-color: var(--color-primary);
+    cursor: pointer;
+    padding: 0.3rem;
+  }
+  .save:hover {
+    background-color: var(--color-sec);
+  }
+}

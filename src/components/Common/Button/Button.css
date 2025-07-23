@@ -1,0 +1,18 @@
+.button {
+  padding: var(--space-md) var(--space-md);
+  border-radius: 5px;
+  color: var(--color-text);
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+.button:hover {
+  background-color: var(--color-sec);
+}
+.button-dark {
+  background-color: var(--color-primary);
+}
+.button-clear {
+  background-color: var(--color-bg3);
+}

@@ -1,0 +1,22 @@
+.public-capsule {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 100dvh;
+  .title {
+    background-color: var(--color-bg4);
+    padding: var(--space-md);
+    border-radius: 5px;
+  }
+  .filter-section {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--color-bg2);
+    border-radius: 5px;
+  }
+  .capsules-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+}

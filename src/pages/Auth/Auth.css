@@ -1,0 +1,68 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90dvh;
+
+  .auth-form {
+    background-color: var(--color-bg2);
+    padding: 3rem;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  .or {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--color-);
+  }
+  span {
+    color: var(--color-text);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  span:hover {
+    color: var(--color-primary);
+  }
+  Button {
+    margin-top: 1rem;
+  }
+}
+
+.toast {
+  background-color: rgba(66, 67, 71, 0.1);
+  border: 1px solid #334155;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  position: fixed;
+  margin-top: 5rem;
+  top: 1rem;
+  left: 0;
+  animation: fade 0.3s ease;
+}
+
+.toast.error {
+  background-color: red;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    top: 0;
+  }
+  to {
+    opacity: 1;
+    top: 20px;
+  }
+}
